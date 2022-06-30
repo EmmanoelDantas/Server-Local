@@ -1,8 +1,9 @@
 const axios = require ('axios') ;
 
 let token = '';
-const env = 'prod';
-const url = env === 'dev' ? 'http://localhost:3000' : 'http://192.168.0.129';
+let dados = '';
+const env = 'dev';
+const url = env === 'dev' ? 'http://localhost:3001' : 'http://192.168.0.129';
 
 const getSession = async () => {
     try {
@@ -12,13 +13,14 @@ const getSession = async () => {
         });
 
         token = data.session;
+        console.log(token);
 
         setTimeout(() => {
             console.log(
                 'Iniciando conexao com a catraca...'
             );
             loadLogs();
-        }, 1000)
+        }, 1000);
     } catch (error) {
         setTimeout(()=> {
             console.log(
@@ -32,9 +34,12 @@ const getSession = async () => {
 
 const loadLogs = async () => {
     try {
-        await axios.post(`${url}/load_objects.fcgi?session=${token}`, {
+        const {data} = await axios.post(`${url}/load_objects.fcgi?session=${token}`, {
             object: 'access_logs'
         });
+
+        dados = data.body;
+        console.log(dados);
 
         setTimeout(()=>{
             console.log(
@@ -50,11 +55,11 @@ const loadLogs = async () => {
         }, 500);
     }
 }
-console.log(
-    'CATRACA CPI - CADES INFORGENESES',
-  '-------------------------------------------------------------------\n\n'
-);
-setTimeout(() => {
-    getSession();
-}, 1000);
-// module.exports = getSession;
+// console.log(
+//     'CATRACA CPI - CADES INFORGENESES',
+//   '-------------------------------------------------------------------\n\n'
+// );
+// setTimeout(() => {
+//     getSession();
+// }, 1000);
+module.exports = {getSession};

@@ -1,11 +1,11 @@
 const express = require('express');
-const getSession = require('./config-catraca-cades/index');
+const {getSession} = require('./config-catraca-cades/index');
 
 const server = express();
 const port = 3000;
 
-server.use(getSession);
+server.get('/', getSession);
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server is Running on port ${port}`);
 });
