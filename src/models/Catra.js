@@ -1,14 +1,14 @@
 const { Sequelize } = require('sequelize');
 const connection = require('../config/database');
 
-const Catra = connction.define('catra_event', {
+const Catra = connection.define('catra_event', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         alowNull: false
     },
     event_name: {
-        type: Sequelize.toString,
+        type: Sequelize.STRING,
         allowNull: false
     },
     time: {
@@ -21,7 +21,7 @@ const Catra = connction.define('catra_event', {
     }
 })
 
-Catra.syncr({force: false}).then(() => {
+Catra.sync({force: false}).then(() => {
     console.log('Create table')
 })
 
