@@ -5,12 +5,8 @@ const Catra = connection.define('catra_event', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        alowNull: false
-    },
-    type: {
-        type: Sequelize.INTEGER,
-        // primaryKey: true,
-        alowNull: false
+        alowNull: false,
+        autoIncrement: true
     },
     event_name: {
         type: Sequelize.STRING,

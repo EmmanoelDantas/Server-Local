@@ -5,25 +5,26 @@ const env = 'dev';
 const url = env === 'dev' ? 'http://localhost:3001' : 'http://192.168.0.129';
 
 
-  const configMonitor = async () => {
+const startMonitorController = async (req, res, next) => {
   
-    try {
-      const { data } = await axios.post(`${url}/login.fcgi`, {
-        login: 'admin',
-        password: 'admin',
-      });
+  try {
+    const { data } = await axios.post(`${url}/login.fcgi`, {
+      login: 'admin',
+      password: 'admin',
+    });
   
-      token = data.session;
-      console.log('Iniciando Sessao');
-      activateMonitor();
-    } catch (error) {
+    token = data.session;
+    console.log('Iniciando Sessao');
+    await activateMonitor();
+    next();
+  } catch (error) {
       
-        console.log(
-          'computador conectado na mesma rede que a catraca e tente novamente!\n\n'
-        );
-        
-    }
-  };
+    console.log(
+    'computador conectado na mesma rede que a catraca e tente novamente!\n\n'
+    );
+    return res.status(401).json({message: "Fail"})
+  }
+};
   
 const activateMonitor = async () => {
   try {
@@ -35,12 +36,13 @@ const activateMonitor = async () => {
       },
     });
     console.log('Monitor ativado');
-      changeUrl();
+    await changeUrl();
   } catch (error) {
    
     console.log(
       '   Não foi possivel ativar o monitor de acessos, tente novamente!  \n\n'
     );
+    throw new Error("Monitor nao ativado")
   }
 };
   
@@ -57,10 +59,8 @@ const changeUrl = async () => {
     console.log(
       '     Não foi possivel redirecionar o monitor, tente novamente!     \n\n'
     );
+    throw new Error("Catraca nao iniciada!")
   }
 };
 
-
-
-
-module.exports = {configMonitor};
+module.exports = {startMonitorController};
