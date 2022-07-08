@@ -41,8 +41,8 @@ const accessLogsController = async (req, res) => {
     }  
 }
 
-// function to update a array of logs
-
+// funcao pra atualizar os logs com base em um array de ids
+// esse array de ids necessita ser de ints
 const updateLogs = async (ids) => {
     if (ids.lenght == 0) {
         throw "Array is empty";
