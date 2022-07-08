@@ -41,4 +41,23 @@ const accessLogsController = async (req, res) => {
     }  
 }
 
+// function to update a array of logs
+
+const updateLogs = async (ids) => {
+    if (ids.lenght == 0) {
+        throw "Array is empty";
+    }
+    try {
+        ids.forEach(e => {
+            await Logs.update({ enviado: true }, {
+                where: {
+                    id: e
+                }
+            }) 
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 module.exports = {accessLogsController}
