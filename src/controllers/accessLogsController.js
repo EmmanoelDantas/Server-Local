@@ -71,13 +71,21 @@ const accessLogsController = async (req, res) => {
 
 // funcao pra atualizar os logs com base em um array de ids
 // esse array de ids necessita ser de ints
+<<<<<<< HEAD
 function updateLogs (ids) {
+=======
+const updateLogs = async (ids) => {
+>>>>>>> 9af1fdb60c4ab2bc91ee2672328afb762b4df6ca
     if (ids.lenght == 0) {
         throw "Array is empty";
     }
     try {
         ids.forEach(e => {
+<<<<<<< HEAD
             Logs.update({ enviado: true }, {
+=======
+            await Logs.update({ enviado: true }, {
+>>>>>>> 9af1fdb60c4ab2bc91ee2672328afb762b4df6ca
                 where: {
                     id: e
                 }
@@ -88,6 +96,7 @@ function updateLogs (ids) {
     }
 }
 
+<<<<<<< HEAD
 function formatData (dateFormated) {
 
     const date = new Date(dateFormated);
@@ -101,4 +110,6 @@ function formatData (dateFormated) {
     return formattedTime;
 }
 
+=======
+>>>>>>> 9af1fdb60c4ab2bc91ee2672328afb762b4df6ca
 module.exports = {accessLogsController}
