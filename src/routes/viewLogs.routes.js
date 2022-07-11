@@ -3,6 +3,6 @@ const { viewLogsController } = require('../controllers/viewLogsController');
 
 const viewLogsRouter = express.Router();
 
-viewLogsRouter.get('/view-logs', viewLogsController);
+viewLogsRouter.post('/view-logs', viewLogsController);
 
 module.exports = viewLogsRouter;

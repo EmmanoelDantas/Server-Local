@@ -3,6 +3,6 @@ const { accessLogsController } = require('../controllers/accessLogsController');
 
 const logsRouter = express.Router();
 
-logsRouter.get('/access-logs', accessLogsController);
+logsRouter.post('/api/notifications/dao', accessLogsController);
 
 module.exports = logsRouter;

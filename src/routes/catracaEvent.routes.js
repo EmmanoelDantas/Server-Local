@@ -3,6 +3,6 @@ const { catracaEventController } = require('../controllers/catracaEventControlle
 
 const eventRouter = express.Router();
 
-eventRouter.get('/event-catraca', catracaEventController);
+eventRouter.post('/api/notifications/event', catracaEventController);
 
 module.exports = eventRouter;
